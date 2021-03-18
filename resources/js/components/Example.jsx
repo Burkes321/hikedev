@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { kml } from "@tmcw/togeojson";
-import React, {useState} from "react";
+import {useEffect, useState} from "react";
 
 function Example() {
 
@@ -66,20 +66,19 @@ function Example() {
 
     return (
         
-        <div className="App-header">
-            <div style={{width: '75vw',display: 'flex', justifyContent:'space-evenly'}}>
-                <input
-                    type="file"
-                    onChange={( e ) => {
-                        setFile( e.target.files[ 0 ] )
-                    }}
-                />
-                <button onClick={() => readFile()}>
-                    Convert!
-                </button>
-            </div>
-            <h2>{status}</h2>
-
+        <div className="container">
+                <div style={{width: '75vw',display: 'flex', justifyContent:'space-evenly'}}>
+                    <input
+                        type="file"
+                        onChange={( e ) => {
+                            setFile( e.target.files[ 0 ] )
+                        }}
+                    />
+                    <button onClick={() => readFile()}>
+                        Convert!
+                    </button>
+                </div>
+                <h2>{status}</h2>
         </div>
         
     );
