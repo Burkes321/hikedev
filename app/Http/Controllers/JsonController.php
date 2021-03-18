@@ -12,11 +12,10 @@ class JsonController extends Controller
 
         $test = new Test;
 
-        $test->data = $request->all();
+        $test->data = json_encode($request->all());
         $test->save();
 
+        return 'ok';
         
-
-        return "success";
     }
 }

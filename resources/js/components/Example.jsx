@@ -17,6 +17,8 @@ function Example() {
 
 
     const readFile = () => {
+
+
         if (!file) {
             setStatus('No file selected');
             return;
@@ -49,9 +51,11 @@ function Example() {
             }));
 
             
-            const jCoords = JSON.stringify(coords);
-            setValues(jCoords);
-            sendToServer(jCoords);
+       
+            console.log(coords);
+            setValues(coords);
+            sendToServer(coords);
+            
 
 
 //////////////
@@ -64,7 +68,8 @@ function Example() {
         reader.readAsText(file);
     }
 
-    const sendToServer = async (jCoords) => {
+    const sendToServer = async (coords) => {
+        event.preventDefault();
 
         setErrors({}); 
 
@@ -77,7 +82,7 @@ function Example() {
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"),
             },
-            body: (jCoords),
+            body: JSON.stringify(coords),
         });
     }
 
@@ -110,6 +115,7 @@ function Example() {
                     </div>
                     <h2>{status}</h2>
                </form>
+
         </div>
         
     );

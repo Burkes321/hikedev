@@ -2024,9 +2024,9 @@ function Example() {
 
         };
       });
-      var jCoords = JSON.stringify(coords);
-      setValues(jCoords);
-      sendToServer(jCoords); //////////////
+      console.log(coords);
+      setValues(coords);
+      sendToServer(coords); //////////////
       // LNG/LAT on 39/40 switched - Gulf of Aden
       /////////////
     };
@@ -2035,14 +2035,15 @@ function Example() {
   };
 
   var sendToServer = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(jCoords) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(coords) {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              event.preventDefault();
               setErrors({});
-              _context.next = 3;
+              _context.next = 4;
               return fetch('/api/json/store', {
                 method: "POST",
                 headers: {
@@ -2050,13 +2051,13 @@ function Example() {
                   "Content-type": "application/json",
                   "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
                 },
-                body: jCoords
+                body: JSON.stringify(coords)
               });
 
-            case 3:
+            case 4:
               response = _context.sent;
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }
