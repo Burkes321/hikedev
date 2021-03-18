@@ -18,3 +18,5 @@ Route::get('/', function () {
     return view('react');
 });
 
+Route::get('/store-json', 'JsonController@store');
+
