@@ -2,12 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { kml } from "@tmcw/togeojson";
 import {useEffect, useState} from "react";
+import axios from 'axios';
 
 function Example() {
 
     const [file, setFile] = useState( null );
     const [status, setStatus] = useState('No file selected');
-    
+    const [values, setValues] = useState({
+        lng: 0,
+        lat: 0 
+    });
+    const [errors, setErrors] = useState(null);
+
+
 
     const readFile = () => {
         if (!file) {
@@ -34,7 +41,6 @@ function Example() {
 
             const geoJson = kml(xml);
             setStatus('Success');
-            console.log(geoJson);
 
             const coords = geoJson.features.map((feature) => ({
                 lng: feature.geometry.coordinates[0],
@@ -42,15 +48,35 @@ function Example() {
                 // elv: feature.geometry.coordinates[2],     //// WIP
             }));
 
+            setValues(coords);
+            const jCoords = JSON.stringify(coords);
+            sendToServer(jCoords);
+
 //////////////
 
 // LNG/LAT on 39/40 switched - Gulf of Aden
 
 /////////////
-            props.setPolycoords(coords);
         };
 
         reader.readAsText(file);
+    }
+
+    const sendToServer = async (jCoords) => {
+
+        setErrors({}); 
+
+        const response = await fetch('/api/json/store', {
+            method: "POST", 
+            headers: {
+                Accept: "application/json",
+                // "Content-type": "application/json",
+                "X-CSRF-TOKEN": document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"),
+            },
+            body: (jCoords),
+        });
     }
 
     const convertToXmlDom = (text) => {
@@ -73,6 +99,7 @@ function Example() {
                         onChange={( e ) => {
                             setFile( e.target.files[ 0 ] )
                         }}
+                        name='data'
                     />
                     <button onClick={() => readFile()}>
                         Convert!
