@@ -12,7 +12,7 @@ class JsonController extends Controller
 
         $test = new Test;
 
-        $test->data = $request->input('jCoords');
+        $test->data = $request->all();
         $test->save();
 
         

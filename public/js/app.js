@@ -2024,8 +2024,8 @@ function Example() {
 
         };
       });
-      setValues(coords);
       var jCoords = JSON.stringify(coords);
+      setValues(jCoords);
       sendToServer(jCoords); //////////////
       // LNG/LAT on 39/40 switched - Gulf of Aden
       /////////////
@@ -2047,7 +2047,7 @@ function Example() {
                 method: "POST",
                 headers: {
                   Accept: "application/json",
-                  // "Content-type": "application/json",
+                  "Content-type": "application/json",
                   "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
                 },
                 body: jCoords
@@ -2080,29 +2080,31 @@ function Example() {
     return xml;
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
     className: "container",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-      style: {
-        width: '75vw',
-        display: 'flex',
-        justifyContent: 'space-evenly'
-      },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-        type: "file",
-        onChange: function onChange(e) {
-          setFile(e.target.files[0]);
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        style: {
+          width: '75vw',
+          display: 'flex',
+          justifyContent: 'space-evenly'
         },
-        name: "data"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-        onClick: function onClick() {
-          return readFile();
-        },
-        children: "Convert!"
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+          type: "file",
+          onChange: function onChange(e) {
+            setFile(e.target.files[0]);
+          },
+          name: "data"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+          onClick: function onClick() {
+            return readFile();
+          },
+          children: "Convert!"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
+        children: status
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
-      children: status
-    })]
+    })
   });
 }
 

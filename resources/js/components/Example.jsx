@@ -48,9 +48,11 @@ function Example() {
                 // elv: feature.geometry.coordinates[2],     //// WIP
             }));
 
-            setValues(coords);
+            
             const jCoords = JSON.stringify(coords);
+            setValues(jCoords);
             sendToServer(jCoords);
+
 
 //////////////
 
@@ -70,7 +72,7 @@ function Example() {
             method: "POST", 
             headers: {
                 Accept: "application/json",
-                // "Content-type": "application/json",
+                "Content-type": "application/json",
                 "X-CSRF-TOKEN": document
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"),
@@ -93,19 +95,21 @@ function Example() {
     return (
         
         <div className="container">
-                <div style={{width: '75vw',display: 'flex', justifyContent:'space-evenly'}}>
-                    <input
-                        type="file"
-                        onChange={( e ) => {
-                            setFile( e.target.files[ 0 ] )
-                        }}
-                        name='data'
-                    />
-                    <button onClick={() => readFile()}>
-                        Convert!
-                    </button>
-                </div>
-                <h2>{status}</h2>
+               <form>
+                    <div style={{width: '75vw',display: 'flex', justifyContent:'space-evenly'}}>
+                        <input
+                            type="file"
+                            onChange={( e ) => {
+                                setFile( e.target.files[ 0 ] )
+                            }}
+                            name='data'
+                        />
+                        <button onClick={() => readFile()}>
+                            Convert!
+                        </button>
+                    </div>
+                    <h2>{status}</h2>
+               </form>
         </div>
         
     );
